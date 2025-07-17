@@ -1,3 +1,6 @@
 build/
 *.out
 .vscode
+
+.obj
+3DViewer
