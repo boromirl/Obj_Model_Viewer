@@ -10,7 +10,7 @@
 #include "settings_dialog.h"
 
 namespace s21 {
-MainWindow::MainWindow(QWidget* parent)
+MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
       file_label_(new QLabel("No file loaded", this)),
       vertex_count_label_(new QLabel("0", this)),
@@ -21,9 +21,9 @@ MainWindow::MainWindow(QWidget* parent)
   ReadSettings();
 
   // Собираем UI
-  auto* central = new QWidget(this);
-  auto* vbox = new QVBoxLayout(central);
-  auto* hbox = new QHBoxLayout();
+  auto *central = new QWidget(this);
+  auto *vbox = new QVBoxLayout(central);
+  auto *hbox = new QHBoxLayout();
 
   hbox->addWidget(file_label_);
   hbox->addWidget(new QLabel("Vert:", this));
@@ -49,7 +49,7 @@ MainWindow::MainWindow(QWidget* parent)
 
 MainWindow::~MainWindow() = default;
 
-void MainWindow::closeEvent(QCloseEvent* event) {
+void MainWindow::closeEvent(QCloseEvent *event) {
   WriteSettings();
   QMainWindow::closeEvent(event);
 }
@@ -107,8 +107,8 @@ void MainWindow::WriteSettings() {
   settings.sync();
 }
 
-Color MainWindow::ReadColorSetting(const QString& key,
-                                   const QString& defaultValue) const {
+Color MainWindow::ReadColorSetting(const QString &key,
+                                   const QString &defaultValue) const {
   QColor qcolor = QSettings(COMPANY_NAME, PROG_NAME)
                       .value(key, defaultValue)
                       .value<QColor>();
@@ -118,7 +118,7 @@ Color MainWindow::ReadColorSetting(const QString& key,
                static_cast<unsigned char>(qcolor.alpha())};
 }
 
-void MainWindow::WriteColorSetting(const QString& key, const Color& color) {
+void MainWindow::WriteColorSetting(const QString &key, const Color &color) {
   QColor qcolor(color.r, color.g, color.b, color.a);
   QSettings(COMPANY_NAME, PROG_NAME).setValue(key, qcolor);
 }
@@ -141,7 +141,7 @@ void MainWindow::CreateMenus() {
 
   menuSettings_ = menuBar()->addMenu("Settings");
 
-  QAction* settings_action = new QAction("Settings", this);
+  QAction *settings_action = new QAction("Settings", this);
   connect(settings_action, &QAction::triggered, this,
           &MainWindow::SlotMenuSettings);
   menuSettings_->addAction(settings_action);
@@ -252,9 +252,9 @@ void MainWindow::SlotMenuSettings() {
 
 // IView-колбэки:
 
-void MainWindow::OnModelLoaded(const ModelData& data, std::size_t vertex_count,
+void MainWindow::OnModelLoaded(const ModelData &data, std::size_t vertex_count,
                                std::size_t edge_count,
-                               const std::string& filename) {
+                               const std::string &filename) {
   // Обновляем метки
   file_label_->setText(QString::fromStdString(filename));
   vertex_count_label_->setText(QString::number(vertex_count));
@@ -267,7 +267,7 @@ void MainWindow::OnModelLoaded(const ModelData& data, std::size_t vertex_count,
   // Можно обновить статус-бар
 }
 
-void MainWindow::OnModelTransformed(const ModelData& data) {
+void MainWindow::OnModelTransformed(const ModelData &data) {
   // При любых трансформациях просто перерисовываем
   render_widget_->SetModelData(data);
   render_widget_->update();
@@ -280,21 +280,21 @@ void MainWindow::OnRenderSettingsChanged() {
   render_widget_->update();
 }
 
-void MainWindow::OnImageSaved(const std::string& filepath) {
+void MainWindow::OnImageSaved(const std::string &filepath) {
   QMessageBox::information(
       this, "Image Saved",
       QString::fromStdString("Image has been saved to:\n%1")
           .arg(QString::fromStdString(filepath)));
 }
 
-void MainWindow::OnGifRecorded(const std::string& filepath) {
+void MainWindow::OnGifRecorded(const std::string &filepath) {
   QMessageBox::information(
       this, "GIF Recorded",
       QString::fromStdString("Image has been saved to:\n%1")
           .arg(QString::fromStdString(filepath)));
 }
 
-void MainWindow::OnError(const std::string& message) {
+void MainWindow::OnError(const std::string &message) {
   QMessageBox::critical(this, "Error", QString::fromStdString(message));
 }
 
