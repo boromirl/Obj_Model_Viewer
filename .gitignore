@@ -7,3 +7,7 @@ docs/html/
 .obj
 3DViewer
 .clang-format
+*.gcda
+*.gcno
+report.info
+report/
