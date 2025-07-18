@@ -1,0 +1,29 @@
+# 5-pointed star (pentagram)
+# Vertices: 10 (5 outer points, 5 inner points)
+# Faces: 10 triangles
+
+# Outer points (radius=1.0)
+v 0.000000 1.000000 0.000000    # v1 (top)
+v 0.951057 0.309017 0.000000    # v2 (top-right)
+v 0.587785 -0.809017 0.000000   # v3 (bottom-right)
+v -0.587785 -0.809017 0.000000  # v4 (bottom-left)
+v -0.951057 0.309017 0.000000   # v5 (top-left)
+
+# Inner points (radius=0.4)
+v 0.000000 0.400000 0.000000    # v6 (top inner)
+v 0.380422 0.123607 0.000000    # v7 (top-right inner)
+v 0.235114 -0.323607 0.000000   # v8 (bottom-right inner)
+v -0.235114 -0.323607 0.000000  # v9 (bottom-left inner)
+v -0.380422 0.123607 0.000000   # v10 (top-left inner)
+
+# Faces (triangles only)
+f -10 -5 -9
+f -9 -5 -4
+f -9 -4 -8
+f -8 -4 -3
+f -8 -3 -7
+f -7 -3 -2
+f -7 -2 -6
+f -6 -2 -1
+f -6 -1 -10
+f -10 -1 -5
