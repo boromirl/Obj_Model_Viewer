@@ -22,8 +22,8 @@ class IView {
                              std::size_t edge_count,
                              const std::string& filename) = 0;
   /// @brief Вызывается после каждого обновления (поворот/перемещение/масштаб)
-  /// @param data Данные модели
-  virtual void OnModelTransformed(const ModelData& data) = 0;
+  /// @param tm Матрица трансформации
+  virtual void OnModelTransformed(const S21Matrix& tm) = 0;
   /// @brief Вызывается после изменения настроек отображения
   virtual void OnRenderSettingsChanged() = 0;
   /// @brief Вызывается по окончании сохранения изображения
@@ -72,19 +72,6 @@ class Controller {
   /// @brief Сброс всех трансформаций в исходное состояние
   /// @return true если сброс прошел успешно, иначе false
   bool ResetTransformations();
-
-  /// @brief Установка типа проекции
-  /// @param type Тип проекции модели
-  // void SetProjection(s21::ProjectionType type);
-  /// @brief Установка стиля рёбер
-  /// @param style Стиль рёбер
-  // void SetEdgeStyle(const s21::EdgeStyle& style);
-  /// @brief Установка стиля вершин
-  /// @param style Стиль вершин
-  // void SetVertexStyle(const s21::VertexStyle& style);
-  /// @brief Установка цвета фона
-  /// @param color Цвет фона
-  // void SetBackgroundColor(const s21::Color& color);
 
   /// @brief Сохранение изображения в файл
   /// @param filepath Путь к файлу

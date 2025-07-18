@@ -19,7 +19,7 @@ bool Controller::LoadModel(const std::string& filepath) {
 
 void Controller::ClearModel() {
   engine_.ClearModel();
-  view_->OnModelTransformed(engine_.GetModelData());
+  view_->OnModelTransformed(engine_.GetModelData().tm);
 }
 
 bool Controller::Translate(double dx, double dy, double dz) {
@@ -28,7 +28,7 @@ bool Controller::Translate(double dx, double dy, double dz) {
     res = false;
   } else {
     engine_.Translate(dx, dy, dz);
-    view_->OnModelTransformed(engine_.GetModelData());
+    view_->OnModelTransformed(engine_.GetModelData().tm);
   }
   return res;
 }
@@ -39,7 +39,7 @@ bool Controller::Rotate(double ax_deg, double ay_deg, double az_deg) {
     res = false;
   } else {
     engine_.Rotate(ax_deg, ay_deg, az_deg);
-    view_->OnModelTransformed(engine_.GetModelData());
+    view_->OnModelTransformed(engine_.GetModelData().tm);
   }
   return res;
 }
@@ -50,7 +50,7 @@ bool Controller::Scale(double factor) {
     res = false;
   } else {
     engine_.Scale(factor);
-    view_->OnModelTransformed(engine_.GetModelData());
+    view_->OnModelTransformed(engine_.GetModelData().tm);
   }
   return res;
 }
@@ -61,30 +61,10 @@ bool Controller::ResetTransformations() {
     res = false;
   } else {
     engine_.ResetTransformations();
-    view_->OnModelTransformed(engine_.GetModelData());
+    view_->OnModelTransformed(engine_.GetModelData().tm);
   }
   return res;
 }
-
-// void Controller::SetProjection(ProjectionType type) {
-//   engine_.SetProjectionType(type);
-//   view_->OnRenderSettingsChanged();
-// }
-
-// void Controller::SetEdgeStyle(const EdgeStyle& style) {
-//   engine_.SetEdgeStyle(style);
-//   view_->OnRenderSettingsChanged();
-// }
-
-// void Controller::SetVertexStyle(const VertexStyle& style) {
-//   engine_.SetVertexStyle(style);
-//   view_->OnRenderSettingsChanged();
-// }
-
-// void Controller::SetBackgroundColor(const Color& color) {
-//   engine_.SetBackgroundColor(color);
-//   view_->OnRenderSettingsChanged();
-// }
 
 // bool Controller::SaveImage(const std::string& filepath, ImageFormat format) {
 //   bool res = true;

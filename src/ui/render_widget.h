@@ -29,6 +29,10 @@ class RenderWidget : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core {
   /// @param data Ссылка на данные модели
   void SetModelData(const ModelData &data);
 
+  /// @brief Устанавливает новую матрицу трансформации
+  /// @param Ссылка на новую матрицу
+  void SetTransformationMatrix(const S21Matrix &matr);
+
  protected:
   /// @brief Инициализация данных OpenGL
   void initializeGL() override;
@@ -91,11 +95,11 @@ class RenderWidget : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core {
   Shader m_lineShader;
 
   /// @brief Модельная матрица
-  S21Matrix model;
+  S21Matrix modelMatr;
   /// @brief Видовая матрица
-  S21Matrix view;
+  S21Matrix viewMatr;
   /// @brief Проекционная матрица
-  S21Matrix projection;
+  S21Matrix projectionMatr;
 };
 
 }  // namespace s21

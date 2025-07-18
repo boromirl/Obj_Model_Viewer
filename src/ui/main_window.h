@@ -135,7 +135,7 @@ class MainWindow : public QMainWindow, public IView {
                      const std::string& filename) override;
   /// @brief Вызывается после каждого обновления (поворот/перемещение/масштаб)
   /// @param data Ссылка на данные модели
-  void OnModelTransformed(const ModelData& data) override;
+  void OnModelTransformed(const S21Matrix& tm) override;
   /// @brief Вызывается после изменения настроек отображения
   void OnRenderSettingsChanged() override;
   /// @brief Вызывается по окончании сохранения изображения

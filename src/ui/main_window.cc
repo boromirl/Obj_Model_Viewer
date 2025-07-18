@@ -267,9 +267,9 @@ void MainWindow::OnModelLoaded(const ModelData &data, std::size_t vertex_count,
   // Можно обновить статус-бар
 }
 
-void MainWindow::OnModelTransformed(const ModelData &data) {
+void MainWindow::OnModelTransformed(const S21Matrix &tm) {
   // При любых трансформациях просто перерисовываем
-  render_widget_->SetModelData(data);
+  render_widget_->SetTransformationMatrix(tm);
   render_widget_->update();
 }
 

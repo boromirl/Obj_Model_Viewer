@@ -53,9 +53,13 @@ void RenderWidget::SetModelData(const ModelData &data) {
   glBindBuffer(GL_ARRAY_BUFFER, 0);
   glBindVertexArray(0);
 
-  model = model_->tm;
+  modelMatr = model_->tm;
   update();       // перерисовка виджета
   doneCurrent();  // выходим из контекста OpenGL
+}
+
+void RenderWidget::SetTransformationMatrix(const S21Matrix &matr) {
+  modelMatr = matr;
 }
 
 void RenderWidget::resizeGL(int w, int h) {
@@ -93,7 +97,7 @@ void RenderWidget::paintGL() {
   ProjectionType pt = parent_->GetProjectionType();
 
   if (pt == ProjectionType::Central) {
-    projection = Perspective(
+    projectionMatr = Perspective(
         45.0f, (float)this->width() / (float)this->height(), 0.1f, 100.0f);
   } else {
     float aspect = (float)this->width() / (float)this->height();
@@ -101,7 +105,7 @@ void RenderWidget::paintGL() {
                              // Если увеличивать, то модель будет отдаляться,
                              // если уменьшить, то модель приблизится
 
-    projection =
+    projectionMatr =
         Ortho(-orthoSize * aspect,  // левая граница "области видимости"
               orthoSize * aspect,  // правая граница "области видимости"
               -orthoSize, orthoSize,  // нижняя, верхняя границы
@@ -112,9 +116,9 @@ void RenderWidget::paintGL() {
   // ---------------------------------
   float cameraDistance =
       3.0f;  // позиция камеры (можно отдалять, если модель не влезает)
-  view = S21Matrix(4, 4);
-  view.SetIdentity(1.0);
-  view(3, 2) = -cameraDistance;
+  viewMatr = S21Matrix(4, 4);
+  viewMatr.SetIdentity(1.0);
+  viewMatr(3, 2) = -cameraDistance;
 
   // Фоновый цвет
   // ------------
@@ -132,9 +136,9 @@ void RenderWidget::paintGL() {
 
   // работа с шейдерами рёбер
   m_lineShader.use();
-  SendMatrixToShader(m_lineShader.ID, model, "model");
-  SendMatrixToShader(m_lineShader.ID, view, "view");
-  SendMatrixToShader(m_lineShader.ID, projection, "projection");
+  SendMatrixToShader(m_lineShader.ID, modelMatr, "model");
+  SendMatrixToShader(m_lineShader.ID, viewMatr, "view");
+  SendMatrixToShader(m_lineShader.ID, projectionMatr, "projection");
   m_lineShader.setVec4("lineColor", e_style.color.r / 255.0f,
                        e_style.color.g / 255.0f, e_style.color.b / 255.0f,
                        e_style.color.a / 255.0f);
@@ -161,9 +165,9 @@ void RenderWidget::paintGL() {
   if (v_style.shape != VertexShape::None) {
     // работа с шейдерами вершин
     m_pointShader.use();
-    SendMatrixToShader(m_pointShader.ID, model, "model");
-    SendMatrixToShader(m_pointShader.ID, view, "view");
-    SendMatrixToShader(m_pointShader.ID, projection, "projection");
+    SendMatrixToShader(m_pointShader.ID, modelMatr, "model");
+    SendMatrixToShader(m_pointShader.ID, viewMatr, "view");
+    SendMatrixToShader(m_pointShader.ID, projectionMatr, "projection");
     m_pointShader.setFloat("pointSize", (float)v_style.size);
     m_pointShader.setVec4("pointColor", v_style.color.r / 255.0f,
                           v_style.color.g / 255.0f, v_style.color.b / 255.0f,
