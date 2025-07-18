@@ -226,37 +226,6 @@ S21Matrix ModelEngine::RotateZMatrix(float angleRad) {
   return rz;
 }
 
-// void ModelEngine::SetProjectionType(ProjectionType type) {
-//   projection_type_ = type;
-//   // TODO: вызвать ApplyTransformation с матрицей проекции или ещё как
-// }
-
-// ProjectionType ModelEngine::GetProjectionType() const {
-//   return projection_type_;
-// }
-
-// void ModelEngine::SetEdgeStyle(const EdgeStyle& style) { edge_style_ =
-// style;
-// }
-
-// const EdgeStyle ModelEngine::GetEdgeStyle() const { return edge_style_; }
-
-// void ModelEngine::SetVertexStyle(const VertexStyle& style) {
-//   vertex_style_ = style;
-// }
-
-// const VertexStyle ModelEngine::GetVertexStyle() const { return
-// vertex_style_;
-// }
-
-// void ModelEngine::SetBackgroundColor(const Color& color) {
-//   background_color_ = color;
-// }
-
-// const Color ModelEngine::GetBackgroundColor() const {
-//   return background_color_;
-// }
-
 // void ModelEngine::SaveImage(const std::string& /*filepath*/,
 //                             ImageFormat /*format*/) {
 //   // Реализация сохранения через выбранную графическую библиотеку
