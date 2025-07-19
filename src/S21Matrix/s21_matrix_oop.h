@@ -24,7 +24,7 @@ class S21Matrix {
 
   // operator overloads
   S21Matrix &operator=(const S21Matrix &other);
-  bool operator==(const S21Matrix &other);
+  bool operator==(const S21Matrix &other) const;
   float &operator()(int row, int col);
   const float &operator()(int row, int col) const;
 
@@ -40,7 +40,7 @@ class S21Matrix {
   S21Matrix &operator*=(const float num);
 
   // methods
-  bool EqMatrix(const S21Matrix &other);
+  bool EqMatrix(const S21Matrix &other) const;
   void SumMatrix(const S21Matrix &other);
   void SubMatrix(const S21Matrix &other);
   void MulNumber(const float num);

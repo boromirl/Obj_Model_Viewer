@@ -220,7 +220,7 @@ float S21Matrix::Determinant() {
   return result;
 }
 
-bool S21Matrix::EqMatrix(const S21Matrix &other) {
+bool S21Matrix::EqMatrix(const S21Matrix &other) const {
   if (rows_ != other.rows_ || cols_ != other.cols_) {
     return false;
   }
@@ -330,7 +330,9 @@ S21Matrix &S21Matrix::operator-=(const S21Matrix &other) {
 }
 
 // перегрузка сравнения
-bool S21Matrix::operator==(const S21Matrix &other) { return EqMatrix(other); }
+bool S21Matrix::operator==(const S21Matrix &other) const {
+  return EqMatrix(other);
+}
 
 // перегрузка умножения матрицы на матрицу
 S21Matrix S21Matrix::operator*(const S21Matrix &other) {

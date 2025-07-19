@@ -22,8 +22,7 @@ GTEST_LIB = -lgtest -lgtest_main
 TEST_EXEC = 3DViewer_test.out
 TEST_DIR = tests
 TEST_SRCS = $(wildcard $(TEST_DIR)/*.cc)
-ENGINE_SRCS = utils/obj_parser.cc S21Matrix/s21_matrix.cc
-# TEST_OBJS = 
+ENGINE_SRCS = utils/obj_parser.cc S21Matrix/s21_matrix.cc engine/model_engine.cc
 test:
 	$(CXX) -o $(TEST_EXEC) $(TEST_SRCS) $(ENGINE_SRCS) $(GTEST_LIB) $(BASE_FLAGS)
 	./$(TEST_EXEC)
@@ -55,4 +54,4 @@ clean: uninstall
 
 rebuild: clean all
 
-# TODO: тесты, покрытие, dist
+# TODO: dist, better dvi
