@@ -33,6 +33,13 @@ class RenderWidget : public QOpenGLWidget, protected QOpenGLFunctions_3_3_Core {
   /// @param Ссылка на новую матрицу
   void SetTransformationMatrix(const S21Matrix &matr);
 
+  /// @brief Сохраняет скриншот текущей модели
+  /// @param filepath Место сохранения скриншота
+  /// @param format Формат изображения
+  /// @param quality Качество изображения
+  bool TakeImage(const QString &filepath, const QString &format = "JPEG",
+                 int quality = 95);
+
  protected:
   /// @brief Инициализация данных OpenGL
   void initializeGL() override;

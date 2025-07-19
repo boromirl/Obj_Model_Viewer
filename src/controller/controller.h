@@ -26,12 +26,6 @@ class IView {
   virtual void OnModelTransformed(const S21Matrix& tm) = 0;
   /// @brief Вызывается после изменения настроек отображения
   virtual void OnRenderSettingsChanged() = 0;
-  /// @brief Вызывается по окончании сохранения изображения
-  /// @param filepath Путь к файлу изображения
-  virtual void OnImageSaved(const std::string& filepath) = 0;
-  /// @brief Вызывается по окончании записи GIF
-  /// @param filepath Путь к файлу записи GIF
-  virtual void OnGifRecorded(const std::string& filepath) = 0;
   /// @brief Вызывается при ошибке
   /// @param message Сообщение об ошибке
   virtual void OnError(const std::string& message) = 0;

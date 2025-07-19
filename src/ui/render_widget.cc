@@ -237,4 +237,15 @@ S21Matrix RenderWidget::Ortho(float left, float right, float bottom, float top,
   return ortho;
 }
 
+bool RenderWidget::TakeImage(const QString &filepath, const QString &format,
+                             int quality) {
+  makeCurrent();
+
+  QImage image = grabFramebuffer().convertToFormat(QImage::Format_RGB888);
+
+  doneCurrent();
+
+  return image.save(filepath, format.toUpper().toLatin1(), quality);
+}
+
 }  // namespace s21

@@ -30,6 +30,12 @@ MainWindow::MainWindow(QWidget *parent)
   hbox->addWidget(vertex_count_label_);
   hbox->addWidget(new QLabel("Eges:", this));
   hbox->addWidget(edge_count_label_);
+  btnTakeImage = new QPushButton("Image", this);
+  hbox->addWidget(btnTakeImage);
+  connect(btnTakeImage, &QPushButton::clicked, this,
+          &MainWindow::SlotTakeImage);
+  btnRecordGif = new QPushButton("GIF", this);
+  hbox->addWidget(btnRecordGif);
   vbox->addLayout(hbox);
   vbox->addWidget(render_widget_, /*stretch=*/1);
 
@@ -250,6 +256,39 @@ void MainWindow::SlotMenuSettings() {
   dialog.exec();
 }
 
+void MainWindow::SlotTakeImage() {
+  QString filter = "BMP Image (*.bmp);;JPEG Image (*.jpg *.jpeg)";
+  QString defaultPath = QDir::homePath() + "screenshot.jpg";
+
+  QString filePath =
+      QFileDialog::getSaveFileName(this, "Save Image As", defaultPath, filter);
+
+  if (filePath.isEmpty()) return;  // пользователь отменил операцию
+
+  // Определяем формат
+  QString format = "JPEG";
+  int quality = 95;
+
+  if (filePath.endsWith(".bmp", Qt::CaseInsensitive)) {
+    format = "BMP";
+  } else if (filePath.endsWith(".jpg", Qt::CaseInsensitive) ||
+             filePath.endsWith(".jpeg", Qt::CaseInsensitive)) {
+    format = "JPEG";
+  }
+
+  // Добавить формат, если не установлен
+  else {
+    filePath += (format == "BMP") ? ".bmp" : ".jpg";
+  }
+
+  // Собственно, сохранение
+  if (!render_widget_->TakeImage(filePath, format, quality)) {
+    QMessageBox::critical(this, "Error", "Failed to save image");
+  } else {
+    OnImageSaved(filePath);
+  }
+}
+
 // IView-колбэки:
 
 void MainWindow::OnModelLoaded(const ModelData &data, std::size_t vertex_count,
@@ -280,19 +319,18 @@ void MainWindow::OnRenderSettingsChanged() {
   render_widget_->update();
 }
 
-void MainWindow::OnImageSaved(const std::string &filepath) {
+void MainWindow::OnImageSaved(const QString &filepath) {
   QMessageBox::information(
       this, "Image Saved",
-      QString::fromStdString("Image has been saved to:\n%1")
-          .arg(QString::fromStdString(filepath)));
+      QString::fromStdString("Image has been saved to:\n%1").arg(filepath));
 }
 
-void MainWindow::OnGifRecorded(const std::string &filepath) {
-  QMessageBox::information(
-      this, "GIF Recorded",
-      QString::fromStdString("Image has been saved to:\n%1")
-          .arg(QString::fromStdString(filepath)));
-}
+// void MainWindow::OnGifRecorded(const std::string &filepath) {
+//   QMessageBox::information(
+//       this, "GIF Recorded",
+//       QString::fromStdString("Image has been saved to:\n%1")
+//           .arg(QString::fromStdString(filepath)));
+// }
 
 void MainWindow::OnError(const std::string &message) {
   QMessageBox::critical(this, "Error", QString::fromStdString(message));

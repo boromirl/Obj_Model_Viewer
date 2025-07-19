@@ -140,10 +140,10 @@ class MainWindow : public QMainWindow, public IView {
   void OnRenderSettingsChanged() override;
   /// @brief Вызывается по окончании сохранения изображения
   /// @param filepath Путь к файлу изображения
-  void OnImageSaved(const std::string& filepath) override;
+  void OnImageSaved(const QString& filepath);
   /// @brief Вызывается по окончании записи GIF
   /// @param filepath Путь к файлу изображения
-  void OnGifRecorded(const std::string& filepath) override;
+  void OnGifRecorded(const QString& filepath);
   /// @brief Вызывается при ошибке
   /// @param message Сообщение об ошибке
   void OnError(const std::string& message) override;
@@ -162,6 +162,10 @@ class MainWindow : public QMainWindow, public IView {
   void SlotScale();
   /// @brief Обработчик нажатия кнопки сброса трансформаций модели
   void SlotReset();
+  /// @brief Обработчик нажатия кнопки сохранения картинки
+  void SlotTakeImage();
+  /// @brief Обработчик нажатия кнопки сохранения GIF
+  // void SlotRecordGif();
 
   /// @brief Слот для меню «Open…»
   void SlotMenuOpen();
@@ -204,6 +208,10 @@ class MainWindow : public QMainWindow, public IView {
   QLabel* vertex_count_label_;
   /// @brief Указатель на надпись количества ребер
   QLabel* edge_count_label_;
+  /// @brief Указатель на кнопку сохранения картинки
+  QPushButton* btnTakeImage;
+  /// @brief Указатель на кнопку записи GIF
+  QPushButton* btnRecordGif;
   /// @brief Указатель на виджет рендеринга
   RenderWidget* render_widget_;
 
