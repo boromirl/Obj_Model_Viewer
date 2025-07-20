@@ -36,6 +36,7 @@ MainWindow::MainWindow(QWidget *parent)
           &MainWindow::SlotTakeImage);
   btnRecordGif = new QPushButton("GIF", this);
   hbox->addWidget(btnRecordGif);
+  btnRecordGif->setDisabled(true);
   vbox->addLayout(hbox);
   vbox->addWidget(render_widget_, /*stretch=*/1);
 
@@ -48,9 +49,6 @@ MainWindow::MainWindow(QWidget *parent)
   CreateTransformToolBar();
 
   vbox->addWidget(transformToolBar_);
-
-  // (далее нужно связать и другие кнопки/поля с лямбдами,
-  // вызывающими controller_.Translate/Rotate/Scale/Reset)
 }
 
 MainWindow::~MainWindow() = default;
@@ -324,13 +322,6 @@ void MainWindow::OnImageSaved(const QString &filepath) {
       this, "Image Saved",
       QString::fromStdString("Image has been saved to:\n%1").arg(filepath));
 }
-
-// void MainWindow::OnGifRecorded(const std::string &filepath) {
-//   QMessageBox::information(
-//       this, "GIF Recorded",
-//       QString::fromStdString("Image has been saved to:\n%1")
-//           .arg(QString::fromStdString(filepath)));
-// }
 
 void MainWindow::OnError(const std::string &message) {
   QMessageBox::critical(this, "Error", QString::fromStdString(message));

@@ -66,28 +66,6 @@ bool Controller::ResetTransformations() {
   return res;
 }
 
-// bool Controller::SaveImage(const std::string& filepath, ImageFormat format) {
-//   bool res = true;
-//   if (!EnsureModelLoaded()) {
-//     res = false;
-//   } else {
-//     engine_.SaveImage(filepath, format);
-//     view_->OnImageSaved(filepath);
-//   }
-//   return res;
-// }
-
-// bool Controller::RecordGif(const std::string& filepath) {
-//   bool res = true;
-//   if (!EnsureModelLoaded()) {
-//     res = false;
-//   } else {
-//     engine_.RecordGif(filepath);
-//     view_->OnGifRecorded(filepath);
-//   }
-//   return res;
-// }
-
 bool Controller::EnsureModelLoaded() {
   bool res = true;
   if (!engine_.HasModel()) {

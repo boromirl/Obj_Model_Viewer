@@ -6,7 +6,6 @@ find_package(Qt6 COMPONENTS Core Gui Widgets OpenGL OpenGLWidgets REQUIRED)
 
 set(CMAKE_AUTOMOC ON)
 
-# add source files
 add_executable(3DViewer
     main.cc
     ui/main_window.cc

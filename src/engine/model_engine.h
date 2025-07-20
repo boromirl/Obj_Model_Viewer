@@ -18,9 +18,6 @@ constexpr int gif_fps = 10;
 constexpr int gif_duration = 5;
 
 namespace s21 {
-/// @brief Формат изображения
-// enum class ImageFormat { BMP, JPEG };
-
 /// @brief Основной класс движка
 class ModelEngine {
  public:
@@ -70,15 +67,6 @@ class ModelEngine {
 
   /// @brief Сброс всех трансформаций в исходное состояние
   void ResetTransformations();
-
-  /// @brief Сохранение изображения в файл
-  /// @param filepath Путь к файлу
-  /// @param format Формат изображения
-  // void SaveImage(const std::string& filepath, ImageFormat format);
-
-  /// @brief Создание скринкастов и их сохранение в файл
-  /// @param filepath Путь к файлу
-  // void RecordGif(const std::string& filepath);
 
  private:
   /// @brief Имя файла модели

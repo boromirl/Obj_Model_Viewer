@@ -67,16 +67,6 @@ class Controller {
   /// @return true если сброс прошел успешно, иначе false
   bool ResetTransformations();
 
-  /// @brief Сохранение изображения в файл
-  /// @param filepath Путь к файлу
-  /// @param format Формат изображения
-  /// @return true если сохранение прошло успешно, иначе false
-  // bool SaveImage(const std::string& filepath, s21::ImageFormat format);
-  /// @brief Создание скринкастов и их сохранение в файл
-  /// @param filepath Путь к файлу
-  /// @return true если запись прошла успешно, иначе false
-  // bool RecordGif(const std::string& filepath);
-
  private:
   /// @brief Обертка для вызова обратного уведомления
   IView* view_;

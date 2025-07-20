@@ -115,9 +115,7 @@ void ModelEngine::Translate(double dx, double dy, double dz) {
 
 void ModelEngine::Rotate(double angle_x_deg, double angle_y_deg,
                          double angle_z_deg) {
-  // Create new rotations (world axes)
   S21Matrix newRot = RotateMatrix(angle_x_deg, angle_y_deg, angle_z_deg);
-  // Apply new rotation BEFORE existing rotation (world-space)
   worldRotation = worldRotation * newRot;
 
   UpdateModelMatrix();
@@ -226,15 +224,4 @@ S21Matrix ModelEngine::RotateZMatrix(float angleRad) {
   return rz;
 }
 
-// void ModelEngine::SaveImage(const std::string& /*filepath*/,
-//                             ImageFormat /*format*/) {
-//   // Реализация сохранения через выбранную графическую библиотеку
-// }
-
-// void ModelEngine::RecordGif(const std::string& /*filepath*/) {
-//   // Реализация записи GIF:
-//   //   - каждый 1/gif_fps сек захватывать кадр
-//   //   - собрать gif_duration*gif_fps кадров
-//   //   - кодировать в GIF-файл
-// }
 }  // namespace s21
