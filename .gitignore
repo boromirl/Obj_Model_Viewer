@@ -11,3 +11,4 @@ docs/html/
 *.gcno
 report.info
 report/
+*.gz

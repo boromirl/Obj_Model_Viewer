@@ -40,6 +40,24 @@ gcov_report:
 	rm report.info.raw report.info *.gcno *.gcda $(GCOV_EXEC)
 	$(OPEN_BROWSER_CMD) ./report/index.html
 
+DIST_DIR = dist
+DIST_FILE = 3DViewer.tar.gz
+dist:
+	@echo "Creating distribution package..."
+	mkdir -p $(DIST_DIR)
+	cp -r assets $(DIST_DIR)/
+	cp -r controller $(DIST_DIR)/
+	cp -r engine $(DIST_DIR)/
+	cp -r S21Matrix $(DIST_DIR)/
+	cp -r ui $(DIST_DIR)/
+	cp -r utils $(DIST_DIR)/
+	cp Makefile $(DIST_DIR)/
+	cp CMakeLists.txt $(DIST_DIR)/
+	cp main.cc $(DIST_DIR)/
+	tar -czf $(DIST_FILE) $(DIST_DIR)
+	rm -rf $(DIST_DIR)
+	@echo "Distribution package created: $(DIST_FILE)"
+
 
 # clang-format
 CLANG-FORMAT = clang-format -style='{CommentPragmas: Insert, BasedOnStyle: Google}'
